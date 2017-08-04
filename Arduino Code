@@ -28,21 +28,26 @@ void setup()
 void loop()
 {
      float temp_reading=analogRead(Sensor);
-     float temperature=temp_reading*(5.0/1023.0)*100;
-     delay(10); 
-   lcd.clear();
-   lcd.setCursor(0,0);
-   lcd.print("Temperature is:");
+     float temperatureK= log(10000.0*((1024.0 / temp_reading - 1)));
+     temperatureK= 1/ (0.001129148 + (0.000234125 + (0.0000000876741 * temperatureK * temperatureK )) * temperatureK);
+
+     float temperature= temperatureK - 273.15;
+     float fTemp = (temperature * 1.8) + 32;
+
+     delay(100); 
+
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Temperature is:");
 
   lcd.setCursor(0,1);
   lcd.print(temperature);
   lcd.write(1);
   lcd.print("C / ");
   
-  int  fTemp = (temperature * 1.8) + 32.0;    // Convert to F
   lcd.print(fTemp);
   lcd.write(1);
   lcd.print("F");
       delay(1000);
-    
+
 }

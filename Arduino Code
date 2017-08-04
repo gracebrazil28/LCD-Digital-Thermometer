@@ -1,6 +1,6 @@
-#include<LiquidCrystal.h>
-LiquidCrystal lcd(7,8,9,10,11,12);
-const int Sensor = A0; 
+#include<LiquidCrystal.h>               //library
+LiquidCrystal lcd(7,8,9,10,11,12);      //declaring LCD pins
+const int Sensor = A0;                  //Thermistor is connected to A0
 byte degree_symbol[8] = 
               {
                 0b00111,
@@ -11,7 +11,7 @@ byte degree_symbol[8] =
                 0b00000,
                 0b00000,
                 0b00000
-              };
+              };                       // Fancy degree symbol
 void setup()
 {
   pinMode(Sensor, INPUT);
@@ -24,17 +24,25 @@ void setup()
   delay(4000);
   lcd.clear();
 }
+                                    // Intro Digital Thermometer
 void loop()
 {
      float temp_reading=analogRead(Sensor);
      float temperature=temp_reading*(5.0/1023.0)*100;
      delay(10); 
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Temperature in C");
-    lcd.setCursor(4,1);
-    lcd.print(temperature);
-    lcd.write(1);
-    lcd.print("C");
-    delay(1000);
+   lcd.clear();
+   lcd.setCursor(0,0);
+   lcd.print("Temperature is:");
+
+  lcd.setCursor(0,1);
+  lcd.print(temperature);
+  lcd.write(1);
+  lcd.print("C / ");
+  
+  int  fTemp = (temperature * 1.8) + 32.0;    // Convert to F
+  lcd.print(fTemp);
+  lcd.write(1);
+  lcd.print("F");
+      delay(1000);
+    
 }

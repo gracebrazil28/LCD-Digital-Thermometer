@@ -6,5 +6,5 @@ I am so excited to share this with you and I want to thank you for visiting my g
 
 See full project here: https://preciousgracebrazil.wordpress.com/portfolio/lcd-digital-thermometer/
 
-
+Happy Making!
 -Precious B-
